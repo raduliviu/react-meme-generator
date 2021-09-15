@@ -38,7 +38,7 @@ function App() {
       <input type="text"></input>
       <button onClick={()=>{pickRandomMeme()}}>Random picture</button>
       <div className="imageArea">
-        {randomMeme && <img src={randomMeme.url} alt="meme"></img>}
+        {randomMeme && <img src={randomMeme.url} style={{width: `${randomMeme.width}`}} alt="meme"></img>}
       </div>
     </div>
   );

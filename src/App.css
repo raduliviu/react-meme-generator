@@ -8,11 +8,11 @@
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
 }
 
 .imageArea {
-    width: 80%;
+    max-width: 80%;
     margin: auto;
 }
