@@ -3,7 +3,9 @@ import React, {useState, useEffect} from 'react';
 
 function App() {
   const [memes, setMemes] = useState([])
-  const [randomMeme, setRandomMeme] = useState("")
+  const [randomMeme, setRandomMeme] = useState("http://i.imgflip.com/1bij.jpg")
+  const [topText, setTopText] = useState("")
+  const [bottomText, setBottomText] = useState("")
 
   useEffect(()=>{
     getData()
@@ -28,18 +30,31 @@ function App() {
   }
 
   const pickRandomMeme = () => {
-    setRandomMeme(memes[Math.floor(Math.random() * memes.length)])
+    setTopText("")
+    setBottomText("")
+    setRandomMeme(memes[Math.floor(Math.random() * memes.length)].url)
+  }
+
+  const handleTopTextChange = (event) => {
+    setTopText(event.target.value)
+  }
+
+  const handleBottomTextChange = (event) => {
+    setBottomText(event.target.value)
   }
 
   return (
     <div className="App">
       <h1>React Meme Generator</h1>
-      <input type="text"></input>
-      <input type="text"></input>
+      <input type="text" value={topText} onChange={handleTopTextChange} placeholder="Enter top text"></input>
+      <input type="text" value={bottomText} onChange={handleBottomTextChange} placeholder="Enter bottom text"></input>
       <button onClick={()=>{pickRandomMeme()}}>Random picture</button>
       <div className="imageArea">
-        {randomMeme && <img src={randomMeme.url} style={{width: `${randomMeme.width}`}} alt="meme"></img>}
+        <img src={randomMeme} alt="meme"></img>
+        <h2 className="top">{topText}</h2>
+        <h2 className="bottom">{bottomText}</h2>
       </div>
+      
     </div>
   );
 }
