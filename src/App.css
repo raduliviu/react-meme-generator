@@ -28,13 +28,15 @@ img {
     padding: 0.2rem;
 }
 
-.imageArea {
+#imageArea {
     position: relative;
+    max-width: fit-content;
+    max-width: -moz-fit-content;
+    margin: auto;
 }
 
-.imageArea h2 {
+#imageArea h2 {
     position: absolute;
-    width: 80%;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
@@ -48,10 +50,11 @@ img {
     text-shadow: 2px 2px 0 #000;
 }
 
-.imageArea .bottom {
+#imageArea .bottom {
     bottom: 0;
 }
 
-.imageArea .top {
+#imageArea .top {
     top: 0;
 }
+

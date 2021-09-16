@@ -36,7 +36,7 @@ function App() {
     setRandomMeme("")
     setTopText("")
     setBottomText("")
-    setRandomMeme(memes[Math.floor(Math.random() * memes.length)].url)
+    setRandomMeme(memes[Math.floor(Math.random() * memes.length)])
   }
 
   const handleTopTextChange = (event) => {
@@ -49,7 +49,7 @@ function App() {
 
   const handleDownload = () => {
     domtoimage
-      .toJpeg(document.getElementById("composedMeme"), { quality: 0.95 })
+      .toJpeg(document.getElementById("imageArea"), { quality: 1 })
       .then(function (dataUrl) {
         var link = document.createElement("a");
         link.download = "my-meme.jpeg";
@@ -85,26 +85,26 @@ function App() {
             setTopText("")
             setBottomText("")
             setUploadedMeme(event.target.files[0])
-            setRandomMeme(URL.createObjectURL(event.target.files[0]));
+            setRandomMeme({url: URL.createObjectURL(event.target.files[0])});
           }}
           ></input>
-          {randomMeme && (
+          {randomMeme.url && (
             <button onClick={handleDownload}>Download meme</button>
           )}
       </div>
       
       <div 
-        id="composedMeme" 
-        className="imageArea"
+        id="imageArea"
         >
-        {randomMeme && (
+        {randomMeme.url && (<>
           <img 
-            src={randomMeme} 
+            src={randomMeme.url} 
             alt="meme"></img>
+
+          <h2 className="top">{topText}</h2>
+          <h2 className="bottom">{bottomText}</h2> </>
         )}
         
-        <h2 className="top">{topText}</h2>
-        <h2 className="bottom">{bottomText}</h2>
       </div>
       
     </div>
