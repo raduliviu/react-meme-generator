@@ -1,12 +1,12 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import Uploader from './Uploader';
 
 function App() {
   const [memes, setMemes] = useState([])
-  const [randomMeme, setRandomMeme] = useState("https://i.imgflip.com/1bij.jpg")
+  const [randomMeme, setRandomMeme] = useState("")
   const [topText, setTopText] = useState("")
   const [bottomText, setBottomText] = useState("")
+  const [uploadedMeme, setUploadedMeme] = useState("")
 
   useEffect(() => {
     getData()
@@ -31,6 +31,8 @@ function App() {
   }
 
   const pickRandomMeme = () => {
+    document.getElementById('imgUpload').value = ''
+    setRandomMeme("")
     setTopText("")
     setBottomText("")
     setRandomMeme(memes[Math.floor(Math.random() * memes.length)].url)
@@ -60,15 +62,33 @@ function App() {
           placeholder="Enter bottom text"></input>
         <button 
           onClick={() => { pickRandomMeme() }}
-        >Random picture</button>
+        >Get a random image</button>
+        <label htmlFor="imgUpload">Upload your own image</label>
+        <input 
+          type="file" 
+          id="imgUpload"
+          onChange={(event) => {
+            console.log(event.target.files[0]);
+            if (uploadedMeme) {URL.revokeObjectURL(uploadedMeme)}
+            setTopText("")
+            setBottomText("")
+            setUploadedMeme(event.target.files[0])
+            setRandomMeme(URL.createObjectURL(event.target.files[0]));
+          }}
+          ></input>
       </div>
 
       <div className="imageArea">
-        <img src={randomMeme} alt="meme"></img>
+        {randomMeme && (
+          <img 
+            src={randomMeme} 
+            alt="meme"></img>
+        )}
+        
         <h2 className="top">{topText}</h2>
         <h2 className="bottom">{bottomText}</h2>
       </div>
-      <Uploader />
+      
       
     </div>
   );
