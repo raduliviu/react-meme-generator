@@ -1,13 +1,14 @@
 import './App.css';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import Uploader from './Uploader';
 
 function App() {
   const [memes, setMemes] = useState([])
-  const [randomMeme, setRandomMeme] = useState("http://i.imgflip.com/1bij.jpg")
+  const [randomMeme, setRandomMeme] = useState("https://i.imgflip.com/1bij.jpg")
   const [topText, setTopText] = useState("")
   const [bottomText, setBottomText] = useState("")
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
   }, [])
 
@@ -46,14 +47,28 @@ function App() {
   return (
     <div className="App">
       <h1>React Meme Generator</h1>
-      <input type="text" value={topText} onChange={handleTopTextChange} placeholder="Enter top text"></input>
-      <input type="text" value={bottomText} onChange={handleBottomTextChange} placeholder="Enter bottom text"></input>
-      <button onClick={()=>{pickRandomMeme()}}>Random picture</button>
+      <div className="inputArea">
+        <input 
+          type="text" 
+          value={topText} 
+          onChange={handleTopTextChange} 
+          placeholder="Enter top text"></input>
+        <input 
+          type="text" 
+          value={bottomText} 
+          onChange={handleBottomTextChange} 
+          placeholder="Enter bottom text"></input>
+        <button 
+          onClick={() => { pickRandomMeme() }}
+        >Random picture</button>
+      </div>
+
       <div className="imageArea">
         <img src={randomMeme} alt="meme"></img>
         <h2 className="top">{topText}</h2>
         <h2 className="bottom">{bottomText}</h2>
       </div>
+      <Uploader />
       
     </div>
   );

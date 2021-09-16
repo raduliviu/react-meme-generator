@@ -12,13 +12,29 @@ img {
     height: auto;
 }
 
+.inputArea {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 2rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputArea input, .inputArea button {
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    padding: 0.2rem;
+}
+
 .imageArea {
     max-width: 80%;
     margin: auto;
     position: relative;
 }
 
-.imageArea > h2 {
+.imageArea h2 {
     position: absolute;
     width: 80%;
     text-align: center;
@@ -31,22 +47,13 @@ img {
     text-transform: uppercase;
     color: white;
     letter-spacing: 1px;
-    text-shadow:
-        2px 2px 0 #000,
-        -2px -2px 0 #000,
-        2px -2px 0 #000,
-        -2px 2px 0 #000,
-        0 2px 0 #000,
-        2px 0 0 #000,
-        0 -2px 0 #000,
-        -2px 0 0 #000,
-        2px 2px 5px #000;
+    text-shadow: 2px 2px 0 #000;
 }
 
-.imageArea > .bottom {
+.imageArea .bottom {
     bottom: 0;
 }
 
-.imageArea > .top {
+.imageArea .top {
     top: 0;
 }
