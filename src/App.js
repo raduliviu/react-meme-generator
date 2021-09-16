@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import domtoimage from 'dom-to-image';
 
 function App() {
   const [memes, setMemes] = useState([])
@@ -46,6 +47,17 @@ function App() {
     setBottomText(event.target.value)
   }
 
+  const handleDownload = () => {
+    domtoimage
+      .toJpeg(document.getElementById("composedMeme"), { quality: 0.95 })
+      .then(function (dataUrl) {
+        var link = document.createElement("a");
+        link.download = "my-meme.jpeg";
+        link.href = dataUrl;
+        link.click();
+      });
+  };
+
   return (
     <div className="App">
       <h1>React Meme Generator</h1>
@@ -76,9 +88,15 @@ function App() {
             setRandomMeme(URL.createObjectURL(event.target.files[0]));
           }}
           ></input>
+          {randomMeme && (
+            <button onClick={handleDownload}>Download meme</button>
+          )}
       </div>
-
-      <div className="imageArea">
+      
+      <div 
+        id="composedMeme" 
+        className="imageArea"
+        >
         {randomMeme && (
           <img 
             src={randomMeme} 
@@ -88,7 +106,6 @@ function App() {
         <h2 className="top">{topText}</h2>
         <h2 className="bottom">{bottomText}</h2>
       </div>
-      
       
     </div>
   );
